@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Class List</title>
+</head>
+<body>
+
+<h2>Class List</h2>
+
+<table border="1" cellpadding="8">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="c : ${classes}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.name}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/classes/new">Create New Class</a>
+<br>
+<a href="/students">Back to Students</a>
+
+</body>
+</html>

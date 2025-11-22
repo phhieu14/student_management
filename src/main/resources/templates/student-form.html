@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Student</title>
+</head>
+<body>
+
+<h2>Create Student</h2>
+
+<form method="post" action="/students/save" th:object="${student}">
+
+    <!-- NAME -->
+    <label>Name:</label>
+    <input type="text" th:field="*{name}">
+    <span th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}"></span>
+    <br><br>
+
+    <!-- CODE -->
+    <label>Code:</label>
+    <input type="text" th:field="*{code}">
+    <span th:if="${#fields.hasErrors('code')}"
+          th:errors="*{code}"></span>
+    <br><br>
+
+    <!-- EMAIL -->
+    <label>Email:</label>
+    <input type="email" th:field="*{email}">
+    <span th:if="${#fields.hasErrors('email')}"
+          th:errors="*{email}"></span>
+    <br><br>
+
+    <!-- STATUS -->
+    <label>Status:</label>
+    <select th:field="*{status}">
+        <option value="ACTIVE">ACTIVE</option>
+        <option value="INACTIVE">INACTIVE</option>
+    </select>
+    <br><br>
+
+    <!-- CLASS DROPDOWN -->
+    <label>Class:</label>
+    <select th:field="*{clazz}">
+        <option value="">-- Select Class --</option>
+        <option th:each="c : ${classes}"
+                th:value="${c.id}"
+                th:text="${c.name}">
+        </option>
+    </select>
+    <span th:if="${#fields.hasErrors('clazz')}"
+          th:errors="*{clazz}"></span>
+
+    <br><br>
+
+    <button type="submit">Save</button>
+</form>
+
+<br>
+<a href="/students">Back to Student List</a>
+
+</body>
+</html>

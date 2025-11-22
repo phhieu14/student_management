@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Class</title>
+</head>
+<body>
+
+<h2>Create Class</h2>
+
+<form method="post" action="/classes/save" th:object="${clazz}">
+
+    <label>Name:</label>
+    <input type="text" th:field="*{name}">
+    <span th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}"></span>
+
+    <br><br>
+
+    <button type="submit">Save</button>
+</form>
+
+<br>
+<a href="/classes">Back to Class List</a>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student List</title>
+</head>
+<body>
+
+<h2>Students</h2>
+
+<!-- ======= FILTER FORM ======= -->
+<form method="get" action="/students">
+    <label>Name:</label>
+    <input type="text" name="name" th:value="${name}">
+
+    <label>Code:</label>
+    <input type="text" name="code" th:value="${code}">
+
+    <button type="submit">Search</button>
+</form>
+
+<br>
+
+<!-- ======= STUDENT TABLE ======= -->
+<form method="post" action="/students/update-status">
+    <table border="1" cellpadding="8">
+        <thead>
+        <tr>
+            <th>Select</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Class</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="s : ${students}">
+            <td><input type="checkbox" name="ids" th:value="${s.id}"></td>
+            <td th:text="${s.id}"></td>
+            <td th:text="${s.name}"></td>
+            <td th:text="${s.code}"></td>
+            <td th:text="${s.email}"></td>
+            <td th:text="${s.status}"></td>
+            <td th:text="${s.clazz.name}"></td>
+            <td ><a href="/students/edit/${student.id}">Sửa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <!-- ======= BATCH UPDATE STATUS ======= -->
+    <label>Change Status To:</label>
+    <select name="status">
+        <option value="ACTIVE">ACTIVE</option>
+        <option value="INACTIVE">INACTIVE</option>
+    </select>
+
+    <button type="submit">Apply</button>
+</form>
+
+<br>
+
+<!-- LINK TO CREATE STUDENT -->
+<a href="/students/new">Create New Student</a>
+
+</body>
+</html>

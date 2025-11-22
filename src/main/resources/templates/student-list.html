@@ -44,8 +44,9 @@
             <td th:text="${s.email}"></td>
             <td th:text="${s.status}"></td>
             <td th:text="${s.clazz.name}"></td>
-            <td ><a href="/students/edit/${student.id}">Sửa</a>
-            </td>
+            <td> <a th:href="@{/students/edit/{id}(id=${s.id})}">Edit</a></td>
+
+
         </tr>
         </tbody>
     </table>

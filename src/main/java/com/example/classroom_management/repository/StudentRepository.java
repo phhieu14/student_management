@@ -18,5 +18,6 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
 
     // Search name hoặc code
     List<Student> searchByNameContainingIgnoreCaseOrCodeContainingIgnoreCase(String name, String code);
+    boolean existsByCode(String code);
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -62,11 +63,12 @@ public class StudentController {
             result.rejectValue("code", "error.code", "Mã sinh viên đã tồn tại");
             model.addAttribute("classes", clazzService.getAll());
             return "student-form";
+        } else {
+            studentService.create(student);
+            return "redirect:/students";
         }
 
 
-        studentService.create(student);
-        return "redirect:/students";
     }
 
     // =======================
@@ -106,6 +108,18 @@ public class StudentController {
 
         studentService.update(id, student);
         return "redirect:/students";
+    }
+    @PostMapping("/import")
+    public String importStudents(@RequestParam("file") MultipartFile file, Model model) {
+        try {
+            int count = studentService.importExcel(file);
+            model.addAttribute("success", "Imported " + count + " students successfully!");
+        } catch (Exception e) {
+            model.addAttribute("error", "Import failed: " + e.getMessage());
+        }
+
+        model.addAttribute("students", studentService.getAll());
+        return "student-list";
     }
 
 }
